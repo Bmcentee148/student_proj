@@ -1,7 +1,9 @@
-# Simple skeleton file for running tests on our project
+# Tests for core classes and their accompanying methods
 
+#-- Import Statements --#
 from nose.tools import *
 from student.student import *
+from student.errors import *
 
 # Person objects for testing
 p1 = Person("Brian","McEntee",25)
@@ -32,12 +34,12 @@ def test_student_class() :
     assert_equals(s3.standing, "sophmore")
     # Equality Tests
     assert_equals(s1, s2)
-    assert_not_equal(s1,s3) 
+    assert_not_equal(s1,s3)
+    # Error raising Tests
+    assert_raises(StudentStandingError, Student,
+        "Casey","Jones",93, "Stony Brook University", "none")
 
-def test_sort_people() :
-    # Sorting based on age tests
-    people = [p3, p2, p1]
-    presorted_people = [p1, p2, p3]
-    for x, y in zip(sort_people(people), presorted_people) :
-        assert_equals(x, y)
+
+
+
 
