@@ -25,3 +25,23 @@ def test_sort_students() :
     presorted_studs = [s3, s1, s2]
     assert_equals(sort_students(studs), presorted_studs)
     assert_not_equal(studs, sort_students(studs))
+
+def test_get_directory() :
+    expected_dir = '/Users/brian/Dev/Python/projects/student_proj/student/data/test.txt'
+    assert_equals(get_file_path('test.txt'), expected_dir)
+
+def test_file_resources() :
+    saved = [p1, p2, p3]
+    save_to_file(saved, 'test.pkl')
+    loaded = load_from_file('test.pkl')
+    assert_equals(saved, loaded)
+
+    save_to_file([],'test.pkl')
+    loaded = load_from_file('test.pkl')
+    assert_equals([],loaded)
+
+    saved = [s1, s2, s3]
+    save_to_file(saved, 'test.pkl')
+    loaded = load_from_file('test.pkl')
+    assert_equals(saved, loaded)
+

@@ -1,5 +1,57 @@
 #-- Import Statements --#
 from errors import StudentStandingError
+import sys
+import os
+import pickle
+
+#-- Resource Handling Functions --#
+
+def save_to_file(ppl_list, pkl_file_name) :
+    """Saves a list of people to a file.
+
+    Notes :
+        overrides contents of existing file with new list, does not update.
+    Args :
+        pkl_file_name - the name of the .pkl file to save to
+        ppl_list - the list of people to save to the file
+    """
+    file_path = get_file_path(pkl_file_name)
+    try :
+        with open(file_path, 'wb') as output_file :
+            pickle.dump(ppl_list, output_file, pickle.HIGHEST_PROTOCOL)
+    except IOError as e :
+        print e
+        sys.exit(1)
+
+def load_from_file(pkl_file_name) :
+    """Loads list of people from a file.
+
+    Args :
+        pkl_file_name - the .pkl file to load the list from 
+    Returns :
+        a list of objects that are of type Person or inherit from Person
+    """
+    file_path = get_file_path(pkl_file_name)
+    result = []
+    try :
+        input_file = open(file_path,'rb')
+    except IOError as e :
+        print "No saved data file found."
+    else :
+        result = pickle.load(input_file)
+    return result
+
+def get_file_path(pkl_file_name) :
+    """Get the path of file we save data to and load data from. 
+    
+    Args :
+        pkl_file_name - the name of the .pkl data file
+    Returns :
+        the path of the file where saved data is located
+    """
+    dir_path = os.path.dirname(os.path.abspath(__file__))
+    file_path =  os.path.join(dir_path,'data',pkl_file_name)
+    return file_path
 
 #-- Class Definitions --#
 
