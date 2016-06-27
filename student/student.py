@@ -84,6 +84,14 @@ class Person(object) :
                 self.last == other.last and
                 self.age == other.age)
 
+    def __str__(self) :
+        string = "Name: {first} {last} \nAge: {age}".format(
+            first = self.first,
+            last = self.last,
+            age = self.age
+            )
+        return string
+
 class Student(Person) :
     """A class that represents a student in college.
 
@@ -106,6 +114,14 @@ class Student(Person) :
         return (super(Student, self).__eq__(other) and
                 self.school_name == other.school_name and
                 self.standing == other.standing)
+
+    def __str__(self) :
+        string_super = super(Student, self).__str__()
+        added = "\nSchool Attended: {school}\nClass Standing: {standing}".format(
+            school =  self.school_name,
+            standing = self.standing
+            )
+        return string_super + added
 
 def sort_people(people_list) :
     """Get a sorted list of the people by age.
