@@ -74,20 +74,17 @@ class Person(object) :
         age - the age of the person in years
     """
 
-    def __init__(self, first, last, age) :
-        self.first = first
-        self.last = last
+    def __init__(self, name, age) :
+        self.name = name
         self.age = age
 
     def __eq__(self, other) :
-        return (self.first == other.first and
-                self.last == other.last and
+        return (self.name == other.name and
                 self.age == other.age)
 
     def __str__(self) :
-        string = "Name: {first} {last} \nAge: {age}".format(
-            first = self.first,
-            last = self.last,
+        string = "Name: {name} \nAge: {age}".format(
+            name = str(self.name),
             age = self.age
             )
         return string
@@ -100,9 +97,9 @@ class Student(Person) :
         standing - the current class standing the student has
     """
 
-    def __init__(self, first, last, age, school_name, standing) :
+    def __init__(self, name, age, school_name, standing) :
         if standing in class_standings :
-            super(Student, self).__init__(first, last, age)
+            super(Student, self).__init__(name, age)
             self.school_name = school_name
             self.standing = standing
         else :
@@ -122,6 +119,26 @@ class Student(Person) :
             standing = self.standing
             )
         return string_super + added
+
+class Name(object) :
+    """A class that represents a person's name.
+
+    Attributes :
+        first - first name
+        last - last name
+        full - the full name given as first last
+    """
+    def __init__(self, first, last) :
+        self.first = first
+        self.last = last
+        self.full = "{f} {l}".format(f = self.first, l = self.last)
+
+    def __str__(self) :
+        return self.full
+
+    def __eq__(self, other) :
+        return (self.first == other.first and
+                self.last == other.last)
 
 def sort_people(people_list) :
     """Get a sorted list of the people by age.
