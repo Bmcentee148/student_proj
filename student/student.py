@@ -4,6 +4,16 @@ import sys
 import os
 import pickle
 
+#-- Module level attributes --#
+
+# A mapping from class standing to years in school
+class_standings = {
+    "freshman" : 1,
+    "sophmore" : 2,
+    "junior" :   3,
+    "senior" :   4
+}
+
 #-- Resource Handling Functions --#
 
 def save_to_file(ppl_list, pkl_file_name) :
@@ -54,14 +64,6 @@ def get_file_path(pkl_file_name) :
     return file_path
 
 #-- Class Definitions --#
-
-# A mapping from class standing to years in school
-class_standings = {
-    "freshman" : 1,
-    "sophmore" : 2,
-    "junior" :   3,
-    "senior" :   4
-}
 
 class Person(object) :
     """A class that represents a general person.
